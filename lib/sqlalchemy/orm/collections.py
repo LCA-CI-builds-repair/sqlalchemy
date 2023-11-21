@@ -1363,23 +1363,6 @@ def _dict_decorators() -> Dict[str, Callable[[_FN], _FN]]:
     return l
 
 
-_set_binop_bases = (set, frozenset)
-
-
-def _set_binops_check_strict(self: Any, obj: Any) -> bool:
-    """Allow only set, frozenset and self.__class__-derived
-    objects in binops."""
-    return isinstance(obj, _set_binop_bases + (self.__class__,))
-
-
-def _set_binops_check_loose(self: Any, obj: Any) -> bool:
-    """Allow anything set-like to participate in set binops."""
-    return (
-        isinstance(obj, _set_binop_bases + (self.__class__,))
-        or util.duck_type_collection(obj) == set
-    )
-
-
 def _set_decorators() -> Dict[str, Callable[[_FN], _FN]]:
     """Tailored instrumentation wrappers for any set-like class."""
 
@@ -1451,8 +1434,6 @@ def _set_decorators() -> Dict[str, Callable[[_FN], _FN]]:
 
     def __ior__(fn):
         def __ior__(self, value):
-            if not _set_binops_check_strict(self, value):
-                return NotImplemented
             for item in value:
                 self.add(item)
             return self
@@ -1470,8 +1451,6 @@ def _set_decorators() -> Dict[str, Callable[[_FN], _FN]]:
 
     def __isub__(fn):
         def __isub__(self, value):
-            if not _set_binops_check_strict(self, value):
-                return NotImplemented
             for item in value:
                 self.discard(item)
             return self
@@ -1494,8 +1473,6 @@ def _set_decorators() -> Dict[str, Callable[[_FN], _FN]]:
 
     def __iand__(fn):
         def __iand__(self, other):
-            if not _set_binops_check_strict(self, other):
-                return NotImplemented
             want, have = self.intersection(other), set(self)
             remove, add = have - want, want - have
 
@@ -1523,8 +1500,6 @@ def _set_decorators() -> Dict[str, Callable[[_FN], _FN]]:
 
     def __ixor__(fn):
         def __ixor__(self, other):
-            if not _set_binops_check_strict(self, other):
-                return NotImplemented
             want, have = self.symmetric_difference(other), set(self)
             remove, add = have - want, want - have
 

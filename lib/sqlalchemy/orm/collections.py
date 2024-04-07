@@ -1360,7 +1360,11 @@ def _dict_decorators() -> Dict[str, Callable[[_FN], _FN]]:
 
     l = locals().copy()
     l.pop("_tidy")
-    return l
+    # return l
+    if issubclass(type(l), set):
+        return l
+    else:
+        raise NotImplementedError(f"The type {type(l)} is not a valid value for the column {self.name}")
 
 
 def _set_decorators() -> Dict[str, Callable[[_FN], _FN]]:

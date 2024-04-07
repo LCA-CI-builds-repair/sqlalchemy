@@ -1362,9 +1362,30 @@ def _dict_decorators() -> Dict[str, Callable[[_FN], _FN]]:
     l.pop("_tidy")
     return l
 
+    def make_proxy(self):
+        class SetProxy(collections.MappedCollection):
+            def __init__(self, data):
+                super().__init__(lambda value: getattr(value, self.key_attr))
+                for item in data:
+                    self._data[item.key] = item
 
-def _set_decorators() -> Dict[str, Callable[[_FN], _FN]]:
-    """Tailored instrumentation wrappers for any set-like class."""
+            def _create(self, key, value):
+                # This method should not be called for a special 'empty' collection
+                assert not self.should_prevent_mutations, \
+                    "This is a special 'empty' collection which cannot accommodate internal mutation operations"
+                return super()._create(key, value)
+
+            def _remove(self, key):
+                # This method should not be called for a special 'empty' collection
+                assert not self.should_prevent_mutations, \
+                    "This is a special 'empty' collection which cannot accommodate internal mutation operations"
+                return super()._remove(key)
+
+            @property
+            def should_prevent_mutations(self):
+                return not any(self._data.values())
+
+        return SetProxy
 
     def _tidy(fn):
         fn._sa_instrumented = True

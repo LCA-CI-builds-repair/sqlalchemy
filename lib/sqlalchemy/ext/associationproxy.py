@@ -52,6 +52,7 @@ from ..orm import collections
 from ..orm import InspectionAttrExtensionType
 from ..orm import interfaces
 from ..orm import ORMDescriptor
+from .util import get_cls_kwargs
 from ..orm.base import SQLORMOperations
 from ..orm.interfaces import _AttributeOptions
 from ..orm.interfaces import _DCAttributeOptions

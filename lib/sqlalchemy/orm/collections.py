@@ -1360,11 +1360,11 @@ def _dict_decorators() -> Dict[str, Callable[[_FN], _FN]]:
 
     l = locals().copy()
     l.pop("_tidy")
-    return l
-
+from typing import Callable, Dict, TypeVar
 
 def _set_decorators() -> Dict[str, Callable[[_FN], _FN]]:
     """Tailored instrumentation wrappers for any set-like class."""
+    _FN = TypeVar("_FN")
 
     def _tidy(fn):
         fn._sa_instrumented = True

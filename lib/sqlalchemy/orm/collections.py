@@ -1360,12 +1360,18 @@ def _dict_decorators() -> Dict[str, Callable[[_FN], _FN]]:
 
     l = locals().copy()
     l.pop("_tidy")
-    return l
-
-
-def _set_decorators() -> Dict[str, Callable[[_FN], _FN]]:
-    """Tailored instrumentation wrappers for any set-like class."""
-
+    def _set_decorators() -> Dict[str, Callable[[_FN], _FN]]:
+        """Tailored instrumentation wrappers for any set-like class."""
+        return {
+            "add": _set_add,
+            "clear": _set_clear,
+            "discard": _set_discard,
+            "difference_update": _set_difference_update,
+            "intersection_update": _set_intersection_update,
+            "remove": _set_remove,
+            "symmetric_difference_update": _set_symmetric_difference_update,
+            "update": _set_update,
+        }
     def _tidy(fn):
         fn._sa_instrumented = True
         fn.__doc__ = getattr(set, fn.__name__).__doc__

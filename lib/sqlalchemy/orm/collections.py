@@ -1360,12 +1360,14 @@ def _dict_decorators() -> Dict[str, Callable[[_FN], _FN]]:
 
     l = locals().copy()
     l.pop("_tidy")
+```python
     return l
 
 
-def _set_decorators() -> Dict[str, Callable[[_FN], _FN]]:
+# Rename the function to follow Python naming conventions and add a docstring
+def set_decorators() -> Dict[str, Callable[[Callable], Callable]]:
     """Tailored instrumentation wrappers for any set-like class."""
-
+```
     def _tidy(fn):
         fn._sa_instrumented = True
         fn.__doc__ = getattr(set, fn.__name__).__doc__

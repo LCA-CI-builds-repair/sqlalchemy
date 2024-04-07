@@ -52,6 +52,7 @@ from ..orm import collections
 from ..orm import InspectionAttrExtensionType
 from ..orm import interfaces
 from ..orm import ORMDescriptor
+from ..orm.exc import AssertionError
 from ..orm.base import SQLORMOperations
 from ..orm.interfaces import _AttributeOptions
 from ..orm.interfaces import _DCAttributeOptions

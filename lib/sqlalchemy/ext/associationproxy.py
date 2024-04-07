@@ -52,6 +52,23 @@ from ..orm import collections
 from ..orm import InspectionAttrExtensionType
 from ..orm import interfaces
 from ..orm import ORMDescriptor
+
+class AssociationList(collections.InstrumentedList):
+    def __init__(self, *args, **kwargs):
+        super(AssociationList, self).__init__(*args, **kwargs)
+
+    def set(self, key: int, value: str) -> None:
+        self[key] = value
+
+    def del_item(self, key: int) -> None:
+        del self[key]
+
+    def _set_decorators(self) -> Dict[str, Callable[[_FN], _FN]]:
+        """Tailored instrumentation wrappers for any set-like class."""
+        return {
+            "set": self.set,
+            "del_item": self.del_item
+        }
 from ..orm.base import SQLORMOperations
 from ..orm.interfaces import _AttributeOptions
 from ..orm.interfaces import _DCAttributeOptions

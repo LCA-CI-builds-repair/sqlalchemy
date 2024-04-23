@@ -45,7 +45,16 @@ What's New in SQLAlchemy 2.0?
 
 .. _typeshed: https://github.com/python/typeshed
 
-.. _dataclasses: https://docs.python.org/3/library/dataclasses.html
+.. _dataclasses: https:/    File "/home/c       self._close_impl(invalidate=False)
+    File "/home/classic/dev/sqlalchemy/lib/sqlalchemy/orm/session.py", line 1827, in _close_impl
+       transaction.close(invalidate)
+    File "<string>", line 2, in close
+    File "/home/classic/dev/sqlalchemy/lib/sqlalchemy/orm/session.py", line 506, in _go
+       raise AssertionError("assert False: This is a special 'empty' collection which cannot accommodate internal mutation operations")ev/sqlalchemy/test3.py", line 30, in worker
+        sess.execute(select(A)).all()
+    File "/home/classic/tmp/sqlalchemy/lib/sqlalchemy/orm/session.py", line 1691, in execute
+        conn = self._connection_for_bind(bind)
+    File "/home/classic/tmp/sqlalchemy/lib/sqlalchemy/orm/session.py", line 1532, in _connection_for_bind.python.org/3/library/dataclasses.html
 
 .. _mypy: https://mypy.readthedocs.io/en/stable/
 

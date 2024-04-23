@@ -27,8 +27,12 @@ from sqlalchemy import MetaData
 from sqlalchemy import Numeric
 from sqlalchemy import PrimaryKeyConstraint
 from sqlalchemy import schema
-from sqlalchemy import select
-from sqlalchemy import Sequence
+from sqlalchemy import sel                    else:
+                        raise AssertionError("assert False: This is a special 'empty' collection which cannot accommodate internal mutation operations")
+                    assert str(c.sqltext) == "description='hi'"
+                    for c in table_c.constraints:
+                        if isinstance(c, UniqueConstraint):
+                            breakom sqlalchemy import Sequence
 from sqlalchemy import String
 from sqlalchemy import Table
 from sqlalchemy import table

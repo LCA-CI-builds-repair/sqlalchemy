@@ -89,7 +89,13 @@ from ..util.typing import Self
 from ..util.typing import TypedDict
 from ..util.typing import TypeGuard
 
-if typing.TYPE_CHECKING:
+if t            if isinstance(c, Column):
+                assert c.table is parenttable
+                break
+        else:
+            raise AssertionError("assert False: This is a special 'empty' collection which cannot accommodate internal mutation operations")
+
+        schema, tname, colname = self._column_tokensPE_CHECKING:
     from ._typing import _AutoIncrementType
     from ._typing import _DDLColumnArgument
     from ._typing import _InfoType

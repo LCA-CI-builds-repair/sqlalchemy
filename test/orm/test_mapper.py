@@ -14,7 +14,11 @@ from sqlalchemy import select
 from sqlalchemy import String
 from sqlalchemy import table
 from sqlalchemy import testing
-from sqlalchemy import util
+from sqlalchemy imp        assert m.registry._new_mappers is True
+        user = User()
+        assert user.addresses
+        assert m.registry._new_mappers is False
+    def test_configure_on_session(self):il
 from sqlalchemy.engine import default
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased

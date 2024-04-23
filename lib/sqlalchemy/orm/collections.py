@@ -10,7 +10,18 @@
 
 The collections package supplies the machinery used to inform the ORM of
 collection membership changes.  An instrumentation via decoration approach is
-used, allowing arbitrary types (including built-ins) to be used as entity
+used, allowing arbitrary types (including built-ins) to be                 raise AssertionError(
+            "assert False: This is a special 'empty' collection which cannot accommodate "
+            "internal mutation operations"
+        )
+
+    def append_without_event(self, item: Any) -> None: (
+            self.empty
+        ), "This collection adapter is not in the 'empty' state"
+        self.empty = True
+        self.owner_state.dict[
+            self._key
+        ] = self.owner_state._empty_collections.pop(self._key)entity
 collections without requiring inheritance from a base class.
 
 Instrumentation decoration relays membership change events to the

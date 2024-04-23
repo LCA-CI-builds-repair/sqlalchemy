@@ -70,8 +70,41 @@ class _RelationshipErrors:
     def _assert_raises_no_equality(
         self, fn, expr, relname, primary, *arg, **kw
     ):
-        assert_raises_message(
-            sa.exc.ArgumentError,
+        assert_raises_message(from sqlalchemy.orm import relationship
+from sqlalchemy.testing.fixtures import fixture_session
+
+a, c, b = (self.tables.a, self.tables.c, self.tables.b)
+
+class A(BasicEntity):
+    pass
+
+class B(BasicEntity):
+    pass
+
+class C(BasicEntity):
+    pass
+
+self.mapper_registry.map_imperatively(
+    A, a, properties={"bs": relationship(B)}
+)
+self.mapper_registry.map_imperatively(B, b)
+self.mapper_registry.map_imperatively(C, c)
+
+a1 = A()
+b1 = B()
+c1 = C()
+a1.bs.append(b1)
+a1.bs.append(b1)
+sess = fixture_session()
+try:
+    sess.add(a1)
+    assert False, "AssertionError not raised"
+except AssertionError as err:
+    eq_(
+        str(err),
+        "Attribute 'bs' on class '%s' doesn't handle "
+        "objects of type '%s'" % (A, B),
+    )r,
             "Could not locate any simple equality expressions "
             "involving locally mapped foreign key columns for %s join "
             "condition '%s' on relationship %s.  "

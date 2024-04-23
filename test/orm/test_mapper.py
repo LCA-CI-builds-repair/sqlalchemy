@@ -31,8 +31,18 @@ from sqlalchemy.orm import dynamic_loader
 from sqlalchemy.orm import Load
 from sqlalchemy.orm import load_only
 from sqlalchemy.orm import reconstructor
-from sqlalchemy.orm import registry
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import registry    def test_column_prop_stays_annotated(self):
+        """test ultimately from #2316 revised for #8064.
+
+        previously column_property() would deannotate the given expression,
+        however this interfered with some compilation scenarios.
+        """
+        User, users = self.classes.User, self.tables.users
+        m = self.mapper(User, users)
+        assert User.id.property.columns[0] is users.c.id
+        assert User.name.property.columns[0] is users.c.name
+        expr = User.name + users.c.name
+        expr2 = sa.select([User.name, users.c.id])m import relationship
 from sqlalchemy.orm import RelationshipProperty
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import synonym

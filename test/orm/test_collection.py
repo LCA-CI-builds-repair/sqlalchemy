@@ -30,7 +30,11 @@ from sqlalchemy.testing import assert_raises_message
 from sqlalchemy.testing import eq_
 from sqlalchemy.testing import expect_raises_message
 from sqlalchemy.testing import expect_warnings
-from sqlalchemy.testing import fixtures
+from sqlalchemy.testing impoself._test_adapter(set())
+self._test_set(set())
+self._test_set_bulk(set())
+self._test_set_wo_mutation(set())
+self._test_set_dataclasses(set())tures
 from sqlalchemy.testing import is_false
 from sqlalchemy.testing import is_true
 from sqlalchemy.testing import ne_

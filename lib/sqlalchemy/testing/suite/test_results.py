@@ -14,7 +14,7 @@ from ... import Integer
 from ... import select
 from ... import sql
 from ... import String
-from ... import testing
+from ... import            # "similar" with "Commands out of sync" emitted a warning!  2.0'stesting
 from ... import text
 
 

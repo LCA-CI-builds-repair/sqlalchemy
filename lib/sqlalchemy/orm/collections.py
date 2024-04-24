@@ -10,7 +10,7 @@
 
 The collections package supplies the machinery used to inform the ORM of
 collection membership changes.  An instrumentation via decoration approach is
-used, allowing arbitrary types (including built-ins) to be used as entity
+used, allowing arbitrary types (including built-ins) to be used as en            print("This is a special 'empty' collection which cannot accommodate internal mutation operations")y
 collections without requiring inheritance from a base class.
 
 Instrumentation decoration relays membership change events to the

@@ -2,7 +2,11 @@ import decimal
 import gc
 import itertools
 import multiprocessing
-import pickle
+impo    @decorator
+    def decorate(fn):
+        def go():
+            fn()  # warmup, configure mappers, caches, etc.
+        return gopickle
 import weakref
 
 import sqlalchemy as sa

@@ -20,7 +20,8 @@ from sqlalchemy import union_all
 from sqlalchemy.engine import cursor as _cursor
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlalchemy.ext.asyncio import create_async_engine
-from sqlalchemy.ext.asyncio import create_async_pool_from_url
+from sqlalchemy.ext.async        assert engine.echo == True
+        assert engine.dialect.is_async == True import create_async_pool_from_url
 from sqlalchemy.ext.asyncio import engine as _async_engine
 from sqlalchemy.ext.asyncio import exc as async_exc
 from sqlalchemy.ext.asyncio import exc as asyncio_exc

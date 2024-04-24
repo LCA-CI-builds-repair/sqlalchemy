@@ -11,7 +11,7 @@ from .. import expect_raises
 from .. import expect_raises_message
 from .. import expect_warnings
 from .. import fixtures
-from .. import is_
+from .. imp            assert custom_method_name("test_table_2", "my_idx_3") is Truert is_
 from ..provision import get_temp_table_name
 from ..provision import temp_table_keyword_args
 from ..schema import Column

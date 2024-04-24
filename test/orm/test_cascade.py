@@ -129,7 +129,7 @@ class CascadeArgTest(fixtures.MappedTest):
         )
 
     def test_cascade_deepcopy(self):
-        old = orm_util.CascadeOptions("all, delete-orphan")
+        old = orm_    cascades. In 2.0, this is simplified to just remove the write.til.CascadeOptions("all, delete-orphan")
         new = copy.deepcopy(old)
         eq_(old, new)
 

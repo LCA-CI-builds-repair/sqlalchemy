@@ -25,8 +25,14 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.orm import synonym
 import sqlalchemy.orm.collections as collections
 from sqlalchemy.orm.collections import collection
-from sqlalchemy.testing import assert_raises
-from sqlalchemy.testing import assert_raises_message
+from sqlalchemy.testin            except TypeError:
+                assert Fals            except TypeError as e:
+                assert False, f"An unexpected TypeError occurred: {e}" "An unexpected TypeError occurred"mport assert_raises
+from sqlalchemy.testi        self._test_adapter(set)
+        self._test_set(set)
+        self._test_set_bulk(set)
+        self._test_set_without_mutation(set)
+        self._test_set_dataclasses(set)port assert_raises_message
 from sqlalchemy.testing import eq_
 from sqlalchemy.testing import expect_raises_message
 from sqlalchemy.testing import expect_warnings
@@ -55,28 +61,82 @@ class Canary:
         self.dupe_check = True
 
     @contextlib.contextmanager
-    def defer_dupe_check(self):
-        self.dupe_check = False
-        try:
-            yield
-        finally:
-            self.dupe_check = True
+    def de    def test_attr_mapped_collection(self):
+        collection_class = collections.attribute_keyed_dict("a")
+        self._test_scalar_mapped(collection_class)
+        self._test_scalar_dataclass_mapped(collection_class)
 
-    def listen(self, attr):
-        event.listen(attr, "append", self.append)
-        event.listen(attr, "append_wo_mutation", self.append_wo_mutation)
-        event.listen(attr, "remove", self.remove)
-        event.listen(attr, "set", self.set)
+    def test_declarative_column_mapped(self):
+        """test that uncompiled attribute usage works with
+        column_mapped_collection"""
 
-    def append(self, obj, value, initiator):
-        if self.dupe_check:
-            assert value not in self.added
-            self.added.add(value)
-        self.data.add(value)
-        return value
+        BaseObject = declarative_base()
 
-    def append_wo_mutation(self, obj, value, initiator):
-        if self.dupe_check:
+        class Foo(BaseObject):
+            __tablename__ = "foo"
+            id = Column(Integer(), primary_key=True)
+            bar_id = Column(Integer, ForeignKey("bar.id"))
+
+        for spec, obj, expected in (
+            (Foo.id, Foo(id=3), 3),
+            ((Foo.id, Foo.bar_id), Foo(id=3, bar_id=12), (3, 12)),
+        ):
+            eq_(
+                collections.column_keyed_dict(spec)().keyfunc(obj),
+                expected,
+            )
+
+    def test_column_mapped_assertions(self):
+        assert_raises_message(
+            sa_exc.ArgumentError,
+            "Column expression expected "
+            "for argument 'mapping_spec'; got 'a'.",
+            collections.column_keyed_dict,
+            "a",
+        )
+        assert_raises_message(
+            sa_exc.ArgumentError,
+            "Column expression expected "
+            "for argument 'mapping_spec'; got .*TextClause.",
+            collections.column_keyed_dict,
+            text("a"),
+        )
+
+    def test_column_mapped_collection(self):
+        children = self.tables.children
+
+        collection_class = collections.column_keyed_dict(children.c.a)
+        self._test_scalar_mapped(collection_class)
+        self._test_scalar_dataclass_mapped(collection_class)
+
+    def test_column_mapped_collection2(self):
+        children = self.tables.children
+
+        collection_class = collections.column_keyed_dict(
+            (children.c.a, children.c.b)
+        )
+        self._test_composite_mapped(collection_class)
+
+    def test_mixin(self, ordered_dict_mro):
+        class Ordered(ordered_dict_mro):
+            def __init__(self, *args):
+                collections.KeyFuncDict.__init__(self, lambda v: v.a, *args)
+                util.OrderedDict.__init__(self)
+
+        collection_class = Ordered
+        self._test_scalar_mapped(collection_class)
+        self._test_scalar_dataclass_mapped(collection_class)
+
+    def test_mixin2(self, ordered_dict_mro):
+        class Ordered2(ordered_dict_mro):
+            def __init__(self, keyfunc, *args):
+                collections.KeyFuncDict.__init__(self, keyfunc, *args)
+                util.OrderedDict.__init__(self)
+
+        def collection_class(*args):
+            return Ordered2(lambda v: (v.a, v.b), *args)
+
+        self._test_composite_mapped(collection_class)    if self.dupe_check:
             assert value in self.added
             self.appended_wo_mutation.add(value)
 

@@ -23,7 +23,7 @@ SQLite does not have built-in DATE, TIME, or DATETIME types, and pysqlite does
 not provide out of the box functionality for translating values between Python
 `datetime` objects and a SQLite-supported format. SQLAlchemy's own
 :class:`~sqlalchemy.types.DateTime` and related types provide date formatting
-and parsing functionality when SQLite is used. The implementation classes are
+and par# Add the relevant code snippet from the file lib/sqlalchemy/dialects/sqlite/base.py for correctioning functionality when SQLite is used. The implementation classes are
 :class:`_sqlite.DATETIME`, :class:`_sqlite.DATE` and :class:`_sqlite.TIME`.
 These types represent dates and times as ISO formatted strings, which also
 nicely support ordering. There's no reliance on typical "libc" internals for

@@ -4,7 +4,17 @@ from typing import Tuple
 
 from sqlalchemy import Column
 from sqlalchemy import column
-from sqlalchemy import create_engine
+from     q1: Query[User] = s    q1: Query[User] = session.query(User).filter(User.id == 5)
+    reveal_type(q1)ssion.query(User).filter(User.id == 5)
+
+    # EXPECTED_TYPE: Query[User]
+    reveal_type(q1)
+
+    # EXPECTED_TYPE: User
+    reveal_type(q1.one())
+
+    # EXPECTED_TYPE: List[User]
+    reveal_type(q1.all()) import create_engine
 from sqlalchemy import delete
 from sqlalchemy import exists
 from sqlalchemy import func

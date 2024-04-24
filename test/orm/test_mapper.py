@@ -13,8 +13,38 @@ from sqlalchemy import MetaData
 from sqlalchemy import select
 from sqlalchemy import String
 from sqlalchemy import table
-from sqlalchemy import testing
-from sqlalchemy import util
+from sqlalchemy import t            select(Address),
+            "SELECT address.address_id, address.user_id FROM address",
+        )
+
+    def test_reconfigure_on_other_mapper(self):
+        """A configure trigger on an already-configured mapper
+        still triggers a check against all mappers."""
+
+        users, Address, addresses, User = (
+            self.tables.users,
+            self.classes.Address,
+            self.tables.addresses,
+            self.classes.User,
+        )
+
+        mp = self.mapper(User, users)
+        sa.orm.configure_mappers()
+        assert mp.registry._new_mappers is False
+
+        m = self.mapper(
+            Address,
+            addresses,
+            properties={"user": relationship(User, backref="addresses")},
+        )
+
+        assert m.configured is False
+        assert m.registry._new_mappers is True
+
+        user_instance = User()
+        assert m.registry._new_mappers is False
+
+        assert user_instance.addressesutil
 from sqlalchemy.engine import default
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import aliased

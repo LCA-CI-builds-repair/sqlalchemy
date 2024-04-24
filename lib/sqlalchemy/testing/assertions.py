@@ -34,8 +34,22 @@ from ..sql.selectable import LABEL_STYLE_TABLENAME_PLUS_COL
 from ..util import decorator
 
 
-def expect_warnings(*messages, **kw):
-    """Context manager which expects one or more warnings.
+def expect_warning        to_remove = []
+        for expected_item in expected:
+            for found_item in found:
+                if _compare_item(found_item, expected_item):
+                    to_remove.append(found_item)
+                    break
+            else:
+                fail(
+                    "Expected %s instance with attributes %s not found."
+                    % (cls.__name__, repr(expected_item))
+                )
+
+        for item in to_remove:
+            found.remove(item)
+
+        return True"Context manager which expects one or more warnings.
 
     With no arguments, squelches all SAWarning emitted via
     sqlalchemy.util.warn and sqlalchemy.util.warn_limited.   Otherwise

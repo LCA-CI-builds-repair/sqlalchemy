@@ -2,8 +2,35 @@
 # Copyright (C) 2005-2023 the SQLAlchemy authors and contributors
 # <see AUTHORS file>
 #
-# This module is part of SQLAlchemy and is released under
-# the MIT License: https://www.opensource.org/licenses/mit-license.php
+# This module is part of SQLAlchemy and            gc_collect()
+
+            if pool.base._strong_ref_connection_records:
+                ln = len(pool.base._strong_ref_connection_records)
+                pool.base._strong_ref_connection_records.clear()
+                assert (
+                    ln == 0
+                ), "%d connection recs not cleared after test suite" % (ln)
+
+    def final_cleanup(self):
+        self.checkin_all()
+        for scope in self.testing_engines:
+            self._drop_testing_engines(scope)
+        testing_reaper.assert_all_closed()
+
+    def assert_all_closed(self):
+        open_connections = [rec for rec in self.proxy_refs if rec.is_valid]
+        if open_connections:
+            assert False, "Not all connections are closed."
+
+testing_reaper = ConnectionKiller()
+
+
+@decorator
+def assert_conns_closed(fn, *args, **kw):
+    try:
+        fn(*args, **kw)
+    finally:
+        testing_reaper.assert_all_closed()icense: https://www.opensource.org/licenses/mit-license.php
 # mypy: ignore-errors
 
 

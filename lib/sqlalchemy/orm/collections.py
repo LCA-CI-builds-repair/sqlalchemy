@@ -10,8 +10,21 @@
 
 The collections package supplies the machinery used to inform the ORM of
 collection membership changes.  An instrumentation via decoration approach is
-used, allowing arbitrary types (including built-ins) to be used as entity
-collections without requiring inheritance from a base class.
+used, allowing arbitrary types (including built-ins) to be class CollectionAdapter:
+    def __init__(self):
+        self.empty = True
+
+    def _refuse_empty(self) -> NoReturn:
+        raise sa_exc.InvalidRequestError(
+            "Cannot add items to this 'empty' collection"
+        )
+
+    def append_without_event(self, item: Any) -> None:
+        """Add or restore an entity to the collection, firing no events."""
+
+        if self.empty:
+            self._refuse_empty()
+        self._data()._sa_appender(item, _sa_initiator=False)ctions without requiring inheritance from a base class.
 
 Instrumentation decoration relays membership change events to the
 :class:`.CollectionAttributeImpl` that is currently managing the collection.

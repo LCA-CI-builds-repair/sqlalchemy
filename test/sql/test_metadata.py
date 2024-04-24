@@ -27,8 +27,29 @@ from sqlalchemy import MetaData
 from sqlalchemy import Numeric
 from sqlalchemy import PrimaryKeyConstraint
 from sqlalchemy import schema
-from sqlalchemy import select
-from sqlalchemy import Sequence
+from sqlalchemy impo                # now
+
+                if has_constraints:
+                    for c in table_c.c.description.constraints:
+                        if isinstance(c, CheckConstraint):
+                            assert str(c.sqltext) == "description='hi'"
+                            break
+                    else:
+                        assert False, "CheckConstraint not found"
+                    
+                    for c in table_c.constraints:
+                        if isinstance(c, UniqueConstraint):
+                            assert c.columns.contains_column(table_c.c.name)
+                            assert not c.columns.contains_column(table.c.name)
+                            break
+                    else:
+                        assert False, "UniqueConstraint not found"
+
+                if testing.requires.comment_reflection.enabled:
+                    eq_(table3_c.comment, "table comment")
+                    eq_(table3_c.c.foo.comment, "some column")
+
+        finally:emy import Sequence
 from sqlalchemy import String
 from sqlalchemy import Table
 from sqlalchemy import table

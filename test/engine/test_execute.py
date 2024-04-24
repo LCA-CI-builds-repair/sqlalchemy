@@ -111,9 +111,37 @@ class ExecuteTest(fixtures.TablesTest):
             tsa.exc.ObjectNotExecutableError,
             "Not an executable object: 'select 1'",
         ):
-            connection.execute("select 1")
+            connection.execute("select 1")            eng.connect()
+            assert False
+        except tsa.exc.DBAPIError as de:
+            assert not de.connection_invalidated
 
-    def test_raw_positional_invalid(self, connection):
+    def test_cant_connect_stay_invalidated(self):
+        class MySpecialException(Exception):
+            pass
+
+        eng = create_engine("sqlite://")
+
+        @event.listens_for(eng, "handle_error")
+        def handle_error(ctx):
+            assert ctx.is_disconnect
+
+        conn = eng.connect()
+
+        conn.invalidate()
+
+        eng.pool._creator = Mock(
+            side_effect=sa.exc.ProgrammingError("Cannot operate on a closed database.")
+        )
+
+        try:
+            with pytest.raises(sa.exc.DBAPIError) as exc:
+                conn.connection
+            assert conn.invalidated
+        except tsa.exc.DBAPIError:
+            assert conn.invalidated
+
+    def test_dont_touch_non_dbapi_exception_on_connect:valid(self, connection):
         assert_raises_message(
             tsa.exc.ArgumentError,
             "List argument must consist only of tuples or dictionaries",

@@ -25,12 +25,43 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.orm import synonym
 import sqlalchemy.orm.collections as collections
 from sqlalchemy.orm.collections import collection
-from sqlalchemy.testing import assert_raises
+from sqlalchemy.testin            except sa.exc.InvalidRequestError: import assert_raises
 from sqlalchemy.testing import assert_raises_message
 from sqlalchemy.testing import eq_
 from sqlalchemy.testing import expect_raises_message
-from sqlalchemy.testing import expect_warnings
-from sqlalchemy.testing import fixtures
+from sqlalchemy.testing import        self._test_adapter(set)
+        self._test_set(set)
+        self._test_set_bulk(set)
+        self._test_set_wo_mutation(set)
+        self._test_set_dataclasses(set)
+
+    def test_set_subclass(self):
+        class MySet(set):
+            pass
+
+        self._test_adapter(MySet)
+        self._test_set(MySet)
+        self._test_set_bulk(MySet)
+        self._test_set_wo_mutation(MySet)
+        self._test_set_dataclasses(MySet)
+        self.assert_(getattr(MySet, "_sa_instrumented") == id(MySet))
+
+    def test_set_duck(self):
+        class SetLike:
+            def __init__(self):
+                self.data = set()
+
+            def add(self, item):
+                self.data.add(item)
+
+            def remove(self, item):
+                self.data.remove(item)
+
+            def discard(self, item):
+                self.data.discard(item)
+
+            def clear(self):
+                self.data.clear().testing import fixtures
 from sqlalchemy.testing import is_false
 from sqlalchemy.testing import is_true
 from sqlalchemy.testing import ne_

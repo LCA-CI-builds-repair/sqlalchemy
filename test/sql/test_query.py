@@ -2,8 +2,28 @@ from sqlalchemy import and_
 from sqlalchemy import asc
 from sqlalchemy import bindparam
 from sqlalchemy import cast
-from sqlalchemy import desc
-from sqlalchemy import exc
+from sqlalchemy impfrom sqlalchemy import literal, and_, or_, not_
+
+def test_or_and_as_columns(connection):
+    true, false = literal(True), literal(False)
+
+    assert connection.execute(select(and_(true, false))).scalar() == False
+    assert connection.execute(select(and_(true, true))).scalar() == True
+    assert connection.execute(select(or_(true, false))).scalar() == True
+    assert connection.execute(select(or_(false, false))).scalar() == False
+    assert connection.execute(select(not_(or_(false, false)))).scalar() == True
+
+    row = connection.execute(
+        select(or_(false, false).label("x"), and_(true, false).label("y"))
+    ).first()
+    assert row.x == False
+    assert row.y == False
+
+    row = connection.execute(
+        select(or_(true, false).label("x"), and_(true, false).label("y"))
+    ).first()
+    assert row.x == True
+    assert row.y == Falsey import exc
 from sqlalchemy import except_
 from sqlalchemy import ForeignKey
 from sqlalchemy import func

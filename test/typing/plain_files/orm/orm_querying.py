@@ -1,7 +1,44 @@
 from __future__ import annotations
 
-from sqlalchemy import ForeignKey
-from sqlalchemy import orm
+from sq    select(B).options(
+        orm.contains_eager    select(B).options(
+        orm.raiseload(B.foo),
+        orm.defaultload(B.foo),
+        orm.defer(B.foo),
+        orm.undefer(B.foo),
+    )
+    select(B).options(
+        orm.contains_eager(B.a).contains_eager(B.bar),
+        orm.load_only(B.a).load_only(B.bar),
+        orm.joinedload(B.a).joinedload(B.bar),
+        orm.subqueryload(B.a).subqueryload(B.bar),
+    )A.bs),
+        orm.load_only(B).load_only(A.bs),
+        orm.joinedload(B).joinedload(A.bs),
+        orm.subqueryload(B).subqueryload(A.bs),
+        orm.selectinload(B).selectinload(A.bs),
+        orm.lazyload(B).lazyload(A.bs),
+        orm.immediateload(B).immediateload(A.bs),
+        orm.noload(B).noload(A.bs),
+        orm.raiseload(B).raiseload(A.bs),
+        orm.defaultload(B).defaultload(A.bs),
+        orm.defer(B).defer(A.bs),
+        orm.undefer(B).undefer(A.bs),
+    )
+    select(B).options(
+        orm.contains_eager(B.a).contains_eager("*"),
+        orm.load_only(B.a).load_only("*"),
+        orm.joinedload(B.a).joinedload("*"),
+        orm.subqueryload(B.a).subqueryload("*"),
+        orm.selectinload(B.a).selectinload("*"),
+        orm.lazyload(B.a).lazyload("*"),
+        orm.immediateload(B.a).immediateload("*"),
+        orm.noload(B.a).noload("*"),
+        orm.raiseload(B.a).raiseload("*"),
+        orm.defaultload(B.a).defaultload("*"),
+        orm.defer(B.a).defer("*"),
+        orm.undefer(B.a).undefer("*"),
+    )from sqlalchemy import orm
 from sqlalchemy import select
 from sqlalchemy.orm import aliased
 from sqlalchemy.orm import DeclarativeBase

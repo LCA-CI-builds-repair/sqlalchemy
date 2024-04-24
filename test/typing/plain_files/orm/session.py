@@ -4,7 +4,10 @@ import asyncio
 from typing import List
 
 from sqlalchemy import create_engine
-from sqlalchemy import ForeignKey
+    session.refresh(u1)
+    session.    scoped.connect(execution_options={"isolation_level": "REPEATABLE READ"})fresh(u1, with_for_update=True)
+    session.refresh(u1)
+    session.refresh(u1, with_for_update=True)sqlalchemy import ForeignKey
 from sqlalchemy.ext.asyncio import async_scoped_session
 from sqlalchemy.ext.asyncio import async_sessionmaker
 from sqlalchemy.ext.asyncio import AsyncSession

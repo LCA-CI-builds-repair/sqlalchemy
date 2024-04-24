@@ -34,8 +34,43 @@ from sqlalchemy.testing import is_
 from sqlalchemy.testing import is_false
 from sqlalchemy.testing import is_instance_of
 from sqlalchemy.testing import is_not
-from sqlalchemy.testing import is_true
-from sqlalchemy.testing import mock
+from sqlalchemy.testing import is_truimport sqlalchemy as sa
+from sqlalchemy import Column, MetaData, Table
+from sqlalchemy.testing import testing
+
+class TestReflection:
+    def test_reflection(self):
+        r1 = sa.Table("idx1", sa.MetaData(), sa.Column("id"))
+        r2 = sa.Table("idx2", sa.MetaData(), sa.Column("id"), sa.Column("name"))
+        r3 = sa.Table("idx3", sa.MetaData(), sa.Column("name"))
+
+        assert r2.name == "idx2"
+        assert r1.unique == True
+        assert r2.unique == False
+        assert r3.unique == False
+        assert {r2.c.id} == set(r1.columns)
+        assert {r2.c.name, r2.c.id} == set(r2.columns)
+        assert {r2.c.name} == set(r3.columns)
+
+    @testing.requires.comment_reflection
+    def test_comment_reflection(self):
+        m1 = MetaData()
+        Table(
+            "sometable",
+            m1,
+            Column("id", sa.Integer, comment="c1 comment"),
+            comment="t1 comment",
+        )
+        m1.create_all(testing.db)
+        m2 = MetaData()
+        t2 = Table("sometable", m2, autoload_with=testing.db)
+
+        assert t2.comment == "t1 comment"
+        assert t2.c.id.comment == "c1 comment"
+
+        t3 = Table("sometable", m2, extend_existing=True)
+        assert t3.comment == "t1 comment"
+        assert t3.c.id.comment == "c1 comment"mport mock
 from sqlalchemy.testing import not_in
 from sqlalchemy.testing import skip
 from sqlalchemy.testing.provision import normalize_sequence

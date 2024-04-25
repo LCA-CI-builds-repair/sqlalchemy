@@ -3384,20 +3384,28 @@ class OnConnectTest(fixtures.TestBase):
         )
 
         class MySpecialException(Exception):
-            pass
+import sqlalchemy as sa
+from sqlalchemy import event
+from sqlalchemy.engine import create_engine
+from sqlalchemy.exc import DBAPIError
 
-        eng = create_engine("sqlite://", module=dbapi)
+metadata = sa.MetaData()
 
-        @event.listens_for(eng, "handle_error")
-        def handle_error(ctx):
-            assert ctx.is_disconnect
-            ctx.is_disconnect = False
+def handle_error(ctx):
+    assert ctx.is_disconnect
+    ctx.is_disconnect = False
 
-        try:
-            eng.connect()
+with create_engine("sqlite://", module=dbapi) as eng:
+    @event.listens_for(eng, "handle_error")
+    def handle_error(ctx):
+        assert ctx.is_disconnect
+        ctx.is_disconnect = False
+
+    try:
+        with eng.connect() as conn:
             assert False
-        except tsa.exc.DBAPIError as de:
-            assert not de.connection_invalidated
+    except DBAPIError as de:
+        assert not de.connection_invalidated
 
     def test_cant_connect_stay_invalidated(self):
         class MySpecialException(Exception):

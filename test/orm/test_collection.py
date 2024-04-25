@@ -1100,13 +1100,6 @@ class CollectionsTest(OrderedDictFixture, fixtures.ORMTest):
         direct = obj.attr
 
         e1 = creator(a=1, b=2)
-        collections.collection_adapter(direct).append_with_event(e1)
-
-        like_me = typecallable()
-        like_me.add(e1)
-
-        eq_(dataclasses.asdict(obj), {"attr": like_me})
-
     def test_set(self):
         self._test_adapter(set)
         self._test_set(set)

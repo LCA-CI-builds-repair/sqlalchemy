@@ -213,16 +213,9 @@ def format_file(
                 plain_format()
 
         if line and (match := doctest_code_start.match(line)):
-            # the line is in a doctest
-            plain_code_section = sql_section = False
-            plain_format()
-            padding, sql_marker, code = match.groups()
-            doctest_block = [
-                BlockLine(line, line_no, code, padding, sql_marker)
-            ]
         elif line and plain_code_section:
-            assert not disable_format
-            assert not doctest_block
+            assert not disable_format, "AssertionError: disable_format is not allowed here"
+            assert not doctest_block, "AssertionError: doctest_block should be empty here"
             if match := sql_code_start.match(line):
                 plain_format()
                 sql_section = True

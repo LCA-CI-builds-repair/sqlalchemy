@@ -535,30 +535,10 @@ class CollectionAdapter:
         """Add an entity to the collection, firing mutation events."""
 
         self._data()._sa_appender(item, _sa_initiator=initiator)
-
-    def _set_empty(self, user_data):
-        assert (
-            not self.empty
-        ), "This collection adapter is already in the 'empty' state"
-        self.empty = True
-        self.owner_state._empty_collections[self._key] = user_data
-
-    def _reset_empty(self) -> None:
-        assert (
-            self.empty
-        ), "This collection adapter is not in the 'empty' state"
-        self.empty = False
-        self.owner_state.dict[
-            self._key
-        ] = self.owner_state._empty_collections.pop(self._key)
-
     def _refuse_empty(self) -> NoReturn:
         raise sa_exc.InvalidRequestError(
-            "This is a special 'empty' collection which cannot accommodate "
-            "internal mutation operations"
+            "This is a special 'empty' collection which cannot accommodate internal mutation operations"
         )
-
-    def append_without_event(self, item: Any) -> None:
         """Add or restore an entity to the collection, firing no events."""
 
         if self.empty:

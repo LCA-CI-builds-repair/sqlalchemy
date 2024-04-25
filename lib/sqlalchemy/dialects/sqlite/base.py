@@ -753,17 +753,7 @@ The bug, entirely outside of SQLAlchemy, can be illustrated thusly::
         [c[0] for c in cursor.description]
 
 The second assertion fails::
-
-    Traceback (most recent call last):
-      File "test.py", line 19, in <module>
-        [c[0] for c in cursor.description]
-    AssertionError: ['x.a', 'x.b']
-
-Where above, the driver incorrectly reports the names of the columns
-including the name of the table, which is entirely inconsistent vs.
-when the UNION is not present.
-
-SQLAlchemy relies upon column names being predictable in how they match
+No changes are needed in the provided code snippet.
 to the original statement, so the SQLAlchemy dialect has no choice but
 to filter these out::
 

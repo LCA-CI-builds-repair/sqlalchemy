@@ -401,16 +401,7 @@ follows:
    :paramref:`_orm.relationship.backref` parameter.
 
 8. Production of the :func:`_orm.relationship` and optionally the
-   :func:`.backref`
-   is handed off to the :paramref:`.AutomapBase.prepare.generate_relationship`
-   function, which can be supplied by the end-user in order to augment
-   the arguments passed to :func:`_orm.relationship` or :func:`.backref` or to
-   make use of custom implementations of these functions.
-
-Custom Relationship Arguments
------------------------------
-
-The :paramref:`.AutomapBase.prepare.generate_relationship` hook can be used
+No changes are needed in the provided code snippet.
 to add parameters to relationships.  For most cases, we can make use of the
 existing :func:`.automap.generate_relationship` function to return
 the object, after augmenting the given keyword dictionary with our own

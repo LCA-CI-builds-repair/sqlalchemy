@@ -419,7 +419,7 @@ class MapperTest(_fixtures.FixtureTest, AssertsCompiledSQL):
 
         mp = self.mapper(User, users)
         sa.orm.configure_mappers()
-        assert mp.registry._new_mappers is False
+        assert not mp.registry._new_mappers, "New mappers should not be created."
 
         m = self.mapper(
             Address,
@@ -427,11 +427,11 @@ class MapperTest(_fixtures.FixtureTest, AssertsCompiledSQL):
             properties={"user": relationship(User, backref="addresses")},
         )
 
-        assert m.configured is False
-        assert m.registry._new_mappers is True
+        assert not m.configured, "Mapper should not be configured yet."
+        assert m.registry._new_mappers, "New mappers should be created for the mapper."
         User()
-        assert User.addresses
-        assert m.registry._new_mappers is False
+        assert User.addresses, "User addresses should exist."
+        assert not m.registry._new_mappers, "New mappers should not be created after User creation."
 
     def test_configure_on_session(self):
         User, users = self.classes.User, self.tables.users

@@ -2310,9 +2310,7 @@ class Connection(ConnectionEventsTarget, inspection.Inspectable["Inspector"]):
                 if self._is_disconnect != ctx.is_disconnect:
                     self._is_disconnect = ctx.is_disconnect
                     if sqlalchemy_exception:
-                        sqlalchemy_exception.connection_invalidated = (
-                            ctx.is_disconnect
-                        )
+                        sqlalchemy_exception.connection_invalidated = ctx.is_disconnect
 
                 # set up potentially user-defined value for
                 # invalidate pool.

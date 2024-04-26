@@ -102,12 +102,12 @@ from .mapped_collection import (
 )
 from .mapped_collection import column_keyed_dict as column_keyed_dict
 from .mapped_collection import (
-    column_mapped_collection as column_mapped_collection,
+    column_mapped_collection,
+    keyfunc_mapping,
+    KeyFuncDict,
+    mapped_collection,
+    MappedCollection,
 )
-from .mapped_collection import keyfunc_mapping as keyfunc_mapping
-from .mapped_collection import KeyFuncDict as KeyFuncDict
-from .mapped_collection import mapped_collection as mapped_collection
-from .mapped_collection import MappedCollection as MappedCollection
 from .mapper import configure_mappers as configure_mappers
 from .mapper import Mapper as Mapper
 from .mapper import reconstructor as reconstructor

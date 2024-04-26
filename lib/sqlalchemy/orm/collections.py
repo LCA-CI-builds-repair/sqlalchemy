@@ -554,8 +554,7 @@ class CollectionAdapter:
 
     def _refuse_empty(self) -> NoReturn:
         raise sa_exc.InvalidRequestError(
-            "This is a special 'empty' collection which cannot accommodate "
-            "internal mutation operations"
+            "This is a special 'empty' collection that does not support internal mutation operations"
         )
 
     def append_without_event(self, item: Any) -> None:

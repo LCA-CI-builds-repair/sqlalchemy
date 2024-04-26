@@ -1908,7 +1908,10 @@ class CollectionAttributeImpl(HasCollectionAdapter, AttributeImpl):
             # a "popper" role to collections.py to complement
             # "remover".
             self.remove(state, dict_, value, initiator, passive=passive)
-        except (ValueError, KeyError, IndexError):
+        except (ValueError, KeyError, IndexError) as e:
+            # Add specific exception handling logic here or log the exception
+            # based on the requirements.
+            pass  # Placeholder for handling the caught exceptions
             pass
 
     def set(

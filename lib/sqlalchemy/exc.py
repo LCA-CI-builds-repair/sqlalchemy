@@ -70,7 +70,7 @@ class HasDescriptionCode:
 
 
 class SQLAlchemyError(HasDescriptionCode, Exception):
-    """Generic error class."""
+    """Generic error class for SQLAlchemy exceptions."""
 
     def _message(self) -> str:
         # rules:

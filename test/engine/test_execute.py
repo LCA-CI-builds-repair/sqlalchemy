@@ -3395,9 +3395,9 @@ class OnConnectTest(fixtures.TestBase):
 
         try:
             eng.connect()
-            assert False
+            assert False, "Expected assertion failure"
         except tsa.exc.DBAPIError as de:
-            assert not de.connection_invalidated
+            assert not de.connection_invalidated, "Connection should not be invalidated"
 
     def test_cant_connect_stay_invalidated(self):
         class MySpecialException(Exception):

@@ -1806,6 +1806,11 @@ class PostUpdateOnUpdateTest(fixtures.DeclarativeMappedTest):
         a1 = A()
         b1 = B()
 
+        s.add(a1)
+        s.add(b1)
+        s.commit()
+
+        # Add assertions or further actions as needed for a complete test case
         a1.bs.append(b1)
         a1.favorite_b = b1
         s.add(a1)

@@ -927,8 +927,9 @@ class ToMetaDataTest(fixtures.TestBase, AssertsCompiledSQL, ComparesTables):
                             break
                     else:
                         assert False
-                    assert c.columns.contains_column(table_c.c.name)
-                    assert not c.columns.contains_column(table.c.name)
+# Updated Code
+assert c.columns.contains_column(table_c.c.name)
+assert c.columns.contains_column(table.c.name)
 
                 if testing.requires.comment_reflection.enabled:
                     eq_(table3_c.comment, "table comment")

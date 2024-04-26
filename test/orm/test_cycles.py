@@ -1800,11 +1800,12 @@ class PostUpdateOnUpdateTest(fixtures.DeclarativeMappedTest):
         PostUpdateOnUpdateTest.db_counter = count()
 
     def test_update_defaults(self):
-        A, B = self.classes("A", "B")
+# Updated Code
+A, B = self.classes("A", "B")
 
-        s = fixture_session()
-        a1 = A()
-        b1 = B()
+s = fixture_session()
+a1 = A()
+b1 = B()
 
         a1.bs.append(b1)
         a1.favorite_b = b1

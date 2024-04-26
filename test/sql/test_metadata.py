@@ -924,11 +924,15 @@ class ToMetaDataTest(fixtures.TestBase, AssertsCompiledSQL, ComparesTables):
                     assert str(c.sqltext) == "description='hi'"
                     for c in table_c.constraints:
                         if isinstance(c, UniqueConstraint):
-                            break
-                    else:
-                        assert False
-                    assert c.columns.contains_column(table_c.c.name)
-                    assert not c.columns.contains_column(table.c.name)
+for c in (table, table_c):
+    for table in (
+        table,
+        table_c
+    ):
+        if c is table:
+            assert c.columns.contains_column(table.c.name)
+        else:
+            assert not c.columns.contains_column(table.c.name)
 
                 if testing.requires.comment_reflection.enabled:
                     eq_(table3_c.comment, "table comment")

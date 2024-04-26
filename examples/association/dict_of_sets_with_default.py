@@ -88,14 +88,16 @@ if __name__ == "__main__":
     # we deal with a dict of key/sets of integers directly.
 
     session.add_all([A(collections={"1": {1, 2, 3}})])
-    session.commit()
+import collections
 
-    a1 = session.query(A).first()
-    print(a1.collections["1"])
-    a1.collections["1"].add(4)
-    session.commit()
+session.commit()
 
-    a1.collections["2"].update([7, 8, 9])
-    session.commit()
+a1 = session.query(A).first()
+a1.collections = collections.defaultdict(set)
+print(a1.collections["1"])
+a1.collections["1"].add(4)
+session.commit()
 
+a1.collections["2"].update([7, 8, 9])
+session.commit()
     print(a1.collections["2"])

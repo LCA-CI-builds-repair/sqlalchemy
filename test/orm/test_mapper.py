@@ -428,10 +428,10 @@ class MapperTest(_fixtures.FixtureTest, AssertsCompiledSQL):
         )
 
         assert m.configured is False
-        assert m.registry._new_mappers is True
-        User()
-        assert User.addresses
-        assert m.registry._new_mappers is False
+assert m.registry._new_mappers == True
+User()
+assert User.addresses
+assert m.registry._new_mappers == False
 
     def test_configure_on_session(self):
         User, users = self.classes.User, self.tables.users

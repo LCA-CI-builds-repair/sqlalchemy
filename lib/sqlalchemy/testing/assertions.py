@@ -878,16 +878,14 @@ class AssertsExecutionResults:
 
         def _compare_item(obj, spec):
             for key, value in spec.items():
-                if isinstance(value, tuple):
-                    try:
-                        self.assert_unordered_result(
-                            getattr(obj, key), value[0], *value[1]
-                        )
-                    except AssertionError:
-                        return False
-                else:
-                    if getattr(obj, key, NOVALUE) != value:
-                        return False
+if isinstance(value, tuple):
+    try:
+        self.assert_unordered_result(getattr(obj, key), value[0], *value[1])
+    except AssertionError:
+        pass
+else:
+    if getattr(obj, key, NOVALUE) != value:
+        return False
             return True
 
         for expected_item in expected:

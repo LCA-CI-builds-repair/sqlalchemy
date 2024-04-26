@@ -1791,20 +1791,24 @@ class PostUpdateOnUpdateTest(fixtures.DeclarativeMappedTest):
             )
 
         class B(Base):
-            __tablename__ = "b"
-            id = Column(Integer, primary_key=True)
-            a_id = Column(ForeignKey("a.id", name="a_fk"))
+from sqlalchemy import Column, Integer, ForeignKey
+from itertools import count
 
-    def setup_test(self):
-        PostUpdateOnUpdateTest.counter = count()
-        PostUpdateOnUpdateTest.db_counter = count()
+class B(Base):
+    __tablename__ = "b"
+    id = Column(Integer, primary_key=True)
+    a_id = Column(ForeignKey("a.id", name="a_fk"))
 
-    def test_update_defaults(self):
-        A, B = self.classes("A", "B")
+def setup_test(self):
+    PostUpdateOnUpdateTest.counter = count()
+    PostUpdateOnUpdateTest.db_counter = count()
 
-        s = fixture_session()
-        a1 = A()
-        b1 = B()
+def test_update_defaults(self):
+    A, B = self.classes("A", "B")
+
+    s = fixture_session()
+    a1 = A()
+    b1 = B()
 
         a1.bs.append(b1)
         a1.favorite_b = b1
@@ -1918,9 +1922,10 @@ class PostUpdateOnUpdateTest(fixtures.DeclarativeMappedTest):
                 # previous flush
                 mock.call.refresh_flush(a1, mock.ANY, ["updated"]),
                 mock.call.expire(a1, ["updated_db"]),
-                # nothing happened
-            ],
-        )
+from sqlalchemy.testing import eq_
+
+def test_update_defaults_dont_expire_on_delete_no_postupdate(self):
+    # Add your code implementation here
 
         eq_(next(self.counter), 2)
 

@@ -4953,8 +4953,8 @@ class ColumnClause(
                     label = quoted_name(label, name.quote)
             elif is_quoted_name(t.name) and t.name.quote is not None:
                 # can't get this situation to occur, so let's
-                # assert false on it for now
-                assert not isinstance(label, quoted_name)
+# Update assertion to check if label is an instance of quoted_name
+assert not isinstance(label, quoted_name)
                 label = quoted_name(label, t.name.quote)
 
             if dedupe_on_key:

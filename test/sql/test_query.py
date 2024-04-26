@@ -146,16 +146,17 @@ class QueryTest(fixtures.TablesTest):
         )
 
         row = connection.execute(
-            select(or_(false, false).label("x"), and_(true, false).label("y"))
-        ).first()
-        assert row.x == False  # noqa
-        assert row.y == False  # noqa
+row = connection.execute(
+    select(or_(false, false).label("x"), and_(true, false).label("y"))
+).first()
+assert row.x == False  # noqa
+assert row.y == False  # noqa
 
-        row = connection.execute(
-            select(or_(true, false).label("x"), and_(true, false).label("y"))
-        ).first()
-        assert row.x == True  # noqa
-        assert row.y == False  # noqa
+row = connection.execute(
+    select(or_(true, false).label("x"), and_(true, false).label("y"))
+).first()
+assert row.x == True  # noqa
+assert row.y == False  # noqa
 
     def test_select_tuple(self, connection):
         users = self.tables.users

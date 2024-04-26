@@ -427,16 +427,10 @@ is set to the ``logging.INFO`` level, notice messages will be logged::
     import logging
 
     logging.getLogger('sqlalchemy.dialects.postgresql').setLevel(logging.INFO)
+import logging
 
-Above, it is assumed that logging is configured externally.  If this is not
-the case, configuration such as ``logging.basicConfig()`` must be utilized::
-
-    import logging
-
-    logging.basicConfig()   # log messages to stdout
-    logging.getLogger('sqlalchemy.dialects.postgresql').setLevel(logging.INFO)
-
-.. seealso::
+logging.basicConfig()   # log messages to stdout
+logging.getLogger('sqlalchemy.dialects.postgresql').setLevel(logging.INFO)
 
     `Logging HOWTO <https://docs.python.org/3/howto/logging.html>`_ - on the python.org website
 

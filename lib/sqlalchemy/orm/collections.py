@@ -544,18 +544,14 @@ class CollectionAdapter:
         self.owner_state._empty_collections[self._key] = user_data
 
     def _reset_empty(self) -> None:
-        assert (
-            self.empty
-        ), "This collection adapter is not in the 'empty' state"
-        self.empty = False
-        self.owner_state.dict[
-            self._key
-        ] = self.owner_state._empty_collections.pop(self._key)
+assert self.empty, "The collection adapter is not in the 'empty' state"
+self.empty = False
+self.owner_state.dict[self._key] = self.owner_state._empty_collections.pop(self._key)
 
-    def _refuse_empty(self) -> NoReturn:
-        raise sa_exc.InvalidRequestError(
-            "This is a special 'empty' collection which cannot accommodate "
-            "internal mutation operations"
+def _refuse_empty(self) -> NoReturn:
+    raise sa_exc.InvalidRequestError(
+        "This is a special 'empty' collection which cannot accommodate internal mutation operations"
+    )
         )
 
     def append_without_event(self, item: Any) -> None:

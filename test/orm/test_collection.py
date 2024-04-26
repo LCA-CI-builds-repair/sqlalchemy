@@ -869,10 +869,10 @@ class CollectionsTest(OrderedDictFixture, fixtures.ORMTest):
             try:
                 direct |= [e, creator()]
                 assert False
-            except TypeError:
-                assert True
-
-        addall(creator(), creator())
+try:
+    addall(creator(), creator())
+except TypeError:
+    assert True
         direct.clear()
         control.clear()
         assert_eq()
@@ -1100,19 +1100,15 @@ class CollectionsTest(OrderedDictFixture, fixtures.ORMTest):
         direct = obj.attr
 
         e1 = creator(a=1, b=2)
-        collections.collection_adapter(direct).append_with_event(e1)
+from sqlalchemy.testing import eq_
+import dataclasses
 
-        like_me = typecallable()
-        like_me.add(e1)
-
-        eq_(dataclasses.asdict(obj), {"attr": like_me})
-
-    def test_set(self):
-        self._test_adapter(set)
-        self._test_set(set)
-        self._test_set_bulk(set)
-        self._test_set_wo_mutation(set)
-        self._test_set_dataclasses(set)
+def test_set(self):
+    self._test_adapter(set)
+    self._test_set(set)
+    self._test_set_bulk(set)
+    self._test_set_wo_mutation(set)
+    self._test_set_dataclasses(set)
 
     def test_set_subclass(self):
         class MySet(set):

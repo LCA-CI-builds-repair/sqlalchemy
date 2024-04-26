@@ -1725,9 +1725,9 @@ class DeclarativeMultiBaseTest(
             )
 
         assert User.__mapper__.registry._new_mappers is True
-        u = User()  # noqa
-        assert User.addresses
-        assert User.__mapper__.registry._new_mappers is False
+u = User()  # noqa
+assert User.addresses
+assert User.__mapper__.registry._new_mappers == False
 
     def test_string_dependency_resolution(self):
         class User(Base, ComparableEntity):

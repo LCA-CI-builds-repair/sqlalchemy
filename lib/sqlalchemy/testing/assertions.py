@@ -889,7 +889,6 @@ class AssertsExecutionResults:
                     if getattr(obj, key, NOVALUE) != value:
                         return False
             return True
-
         for expected_item in expected:
             for found_item in found:
                 if _compare_item(found_item, expected_item):

@@ -878,7 +878,6 @@ class AttributesTest(fixtures.ORMTest):
                 typecallable=dict,
                 useobject=True,
             )
-            assert False
         except sa_exc.ArgumentError as e:
             assert (
                 str(e) == "Type InstrumentedDict must elect an appender "

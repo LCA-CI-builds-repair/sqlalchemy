@@ -1105,7 +1105,7 @@ class CollectionsTest(OrderedDictFixture, fixtures.ORMTest):
         like_me = typecallable()
         like_me.add(e1)
 
-        eq_(dataclasses.asdict(obj), {"attr": like_me})
+        eq_(dataclasses.asdict(e1), {"attr": like_me})
 
     def test_set(self):
         self._test_adapter(set)

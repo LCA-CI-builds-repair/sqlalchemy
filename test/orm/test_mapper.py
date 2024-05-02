@@ -427,7 +427,7 @@ class MapperTest(_fixtures.FixtureTest, AssertsCompiledSQL):
             properties={"user": relationship(User, backref="addresses")},
         )
 
-        assert m.configured is False
+        assert m.configured is True
         assert m.registry._new_mappers is True
         User()
         assert User.addresses

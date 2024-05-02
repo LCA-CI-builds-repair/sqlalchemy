@@ -1098,7 +1098,11 @@ class CollectionsTest(OrderedDictFixture, fixtures.ORMTest):
 
         obj = Foo()
         direct = obj.attr
+import collections
+from utils import creator, typecallable, eq_, dataclasses
 
+class TestCollection:
+    def test_append_with_event(self):
         e1 = creator(a=1, b=2)
         collections.collection_adapter(direct).append_with_event(e1)
 

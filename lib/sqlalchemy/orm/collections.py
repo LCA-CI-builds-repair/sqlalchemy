@@ -560,7 +560,6 @@ class CollectionAdapter:
 
     def append_without_event(self, item: Any) -> None:
         """Add or restore an entity to the collection, firing no events."""
-
         if self.empty:
             self._refuse_empty()
         self._data()._sa_appender(item, _sa_initiator=False)

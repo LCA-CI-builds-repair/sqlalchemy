@@ -1790,10 +1790,10 @@ class PostUpdateOnUpdateTest(fixtures.DeclarativeMappedTest):
                 ),
             )
 
-        class B(Base):
-            __tablename__ = "b"
-            id = Column(Integer, primary_key=True)
-            a_id = Column(ForeignKey("a.id", name="a_fk"))
+    class B(Base):
+        __tablename__ = "b"
+        id = Column(Integer, primary_key=True)
+        a_id = Column(ForeignKey("a.id", name="a_fk"))
 
     def setup_test(self):
         PostUpdateOnUpdateTest.counter = count()

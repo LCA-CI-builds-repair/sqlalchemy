@@ -925,11 +925,10 @@ class ToMetaDataTest(fixtures.TestBase, AssertsCompiledSQL, ComparesTables):
                     for c in table_c.constraints:
                         if isinstance(c, UniqueConstraint):
                             break
-                    else:
-                        assert False
+                        else:
+                            assert False
                     assert c.columns.contains_column(table_c.c.name)
                     assert not c.columns.contains_column(table.c.name)
-
                 if testing.requires.comment_reflection.enabled:
                     eq_(table3_c.comment, "table comment")
                     eq_(table3_c.c.foo.comment, "some column")

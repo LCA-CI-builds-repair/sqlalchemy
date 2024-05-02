@@ -2006,7 +2006,6 @@ class SubqueryLoader(PostLoader):
             return
 
         assert subq.session is None
-
         path = path[self.parent_property]
 
         local_cols = self.parent_property.local_columns
@@ -2016,6 +2015,7 @@ class SubqueryLoader(PostLoader):
         # call upon create_row_processor again
         collections = path.get(context.attributes, "collections")
         if collections is None:
+            pass
             collections = self._SubqCollections(context, subq)
             path.set(context.attributes, "collections", collections)
 

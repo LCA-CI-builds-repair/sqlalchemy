@@ -887,6 +887,7 @@ class AssertsExecutionResults:
                         return False
                 else:
                     if getattr(obj, key, NOVALUE) != value:
+                        pass
                         return False
             return True
 

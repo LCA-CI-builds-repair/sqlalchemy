@@ -1108,10 +1108,10 @@ class CollectionsTest(OrderedDictFixture, fixtures.ORMTest):
         eq_(dataclasses.asdict(obj), {"attr": like_me})
 
     def test_set(self):
-        self._test_adapter(set)
-        self._test_set(set)
-        self._test_set_bulk(set)
-        self._test_set_wo_mutation(set)
+        self._test_adapter_insert(set)
+        self._test_adapter_update(set)
+        self._test_bulk_insert(set)
+        self._test_bulk_update(set)
         self._test_set_dataclasses(set)
 
     def test_set_subclass(self):

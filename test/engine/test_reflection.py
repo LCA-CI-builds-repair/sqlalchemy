@@ -1306,9 +1306,9 @@ class ReflectionTest(fixtures.TestBase, ComparesTables):
 
         assert r1.name == "idx1"
         assert r2.name == "idx2"
-        assert r1.unique == True  # noqa
-        assert r2.unique == False  # noqa
-        assert r3.unique == False  # noqa
+        assert r1.unique == True
+        assert r2.unique == False
+        assert r3.unique == False
         assert {t2.c.id} == set(r1.columns)
         assert {t2.c.name, t2.c.id} == set(r2.columns)
         assert {t2.c.name} == set(r3.columns)

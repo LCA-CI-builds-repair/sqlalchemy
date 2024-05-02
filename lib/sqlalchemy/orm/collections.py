@@ -557,7 +557,6 @@ class CollectionAdapter:
             "This is a special 'empty' collection which cannot accommodate "
             "internal mutation operations"
         )
-
     def append_without_event(self, item: Any) -> None:
         """Add or restore an entity to the collection, firing no events."""
 

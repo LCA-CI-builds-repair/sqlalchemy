@@ -409,7 +409,6 @@ follows:
 
 Custom Relationship Arguments
 -----------------------------
-
 The :paramref:`.AutomapBase.prepare.generate_relationship` hook can be used
 to add parameters to relationships.  For most cases, we can make use of the
 existing :func:`.automap.generate_relationship` function to return

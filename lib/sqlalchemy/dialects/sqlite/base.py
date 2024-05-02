@@ -762,7 +762,6 @@ The second assertion fails::
 Where above, the driver incorrectly reports the names of the columns
 including the name of the table, which is entirely inconsistent vs.
 when the UNION is not present.
-
 SQLAlchemy relies upon column names being predictable in how they match
 to the original statement, so the SQLAlchemy dialect has no choice but
 to filter these out::

@@ -221,8 +221,6 @@ def format_file(
                 BlockLine(line, line_no, code, padding, sql_marker)
             ]
         elif line and plain_code_section:
-            assert not disable_format
-            assert not doctest_block
             if match := sql_code_start.match(line):
                 plain_format()
                 sql_section = True

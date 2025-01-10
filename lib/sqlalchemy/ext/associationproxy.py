@@ -391,6 +391,14 @@ class AssociationProxy(
         self.getset_factory = getset_factory
         self.proxy_factory = proxy_factory
         self.proxy_bulk_set = proxy_bulk_set
+        self._info = info
+        self.cascade_scalar_deletes = cascade_scalar_deletes
+        self.create_on_none_assignment = create_on_none_assignment
+        self.attribute_options = attribute_options or _DEFAULT_ATTRIBUTE_OPTIONS attr
+        self.creator = creator
+        self.getset_factory = getset_factory
+        self.proxy_factory = proxy_factory
+        self.proxy_bulk_set = proxy_bulk_set
 
         if cascade_scalar_deletes and create_on_none_assignment:
             raise exc.ArgumentError(

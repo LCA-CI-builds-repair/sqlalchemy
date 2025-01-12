@@ -386,7 +386,7 @@ class AssociationProxy(
 
         """
         self.target_collection = target_collection
-        self.value_attr = attr
+        self.value_attr = attr attr
         self.creator = creator
         self.getset_factory = getset_factory
         self.proxy_factory = proxy_factory

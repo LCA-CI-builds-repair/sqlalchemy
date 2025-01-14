@@ -297,7 +297,8 @@ class collection:
         This tag will prevent any decoration from being applied to the
         method. Use this if you are orchestrating your own calls to
         :func:`.collection_adapter` in one of the basic SQLAlchemy
-        interface methods, or to prevent an automatic ABC method
+        interface methods, or to prevent an automatic abstract base 
+        class (ABC) method 
         decoration from wrapping your implementation::
 
             # normally an 'extend' method on a list-like class would be

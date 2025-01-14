@@ -326,6 +326,13 @@ class collection:
         replaced entirely, as in::
 
             myobj.acollection = [newvalue1, newvalue2]
+        
+        The converter method is deprecated and will be removed in a future 
+        release. Please refer to the :class:`.AttributeEvents.bulk_replace` 
+        listener interface in conjunction with the :func:`.event.listen` 
+        function for an alternative to the converter hook.
+
+        .. deprecated:: 1.3
 
         The converter method will receive the object being assigned and should
         return an iterable of values suitable for use by the ``appender``

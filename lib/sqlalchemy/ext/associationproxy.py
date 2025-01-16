@@ -85,7 +85,7 @@ def association_proxy(
     target_collection: str,
     attr: str,
     *,
-    creator: Optional[_CreatorProtocol] = None,
+    creator: Optional[_PlainCreatorProtocol] = None,
     getset_factory: Optional[_GetSetFactoryProtocol] = None,
     proxy_factory: Optional[_ProxyFactoryProtocol] = None,
     proxy_bulk_set: Optional[_ProxyBulkSetProtocol] = None,

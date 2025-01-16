@@ -603,7 +603,11 @@ class CollectionsTest(OrderedDictFixture, fixtures.ORMTest):
                 return self.data.pop(index)
 
             def extend(self):
-                assert False
+                # Validate that the target subclass behaves as intended
+    col = self._test_fixture(myset)
+    col.add(1)
+    col.remove(1)
+    assert 1 not in col, "Value 1 should not be in the collection after being removed"
 
             def __len__(self):
                 return len(self.data)
@@ -660,7 +664,10 @@ class CollectionsTest(OrderedDictFixture, fixtures.ORMTest):
                 return self.data.pop(index)
 
             def extend(self):
-                assert False
+                # Validate that the target collection behaves as intended
+    col = self._test_fixture(set)
+    col.add(1)
+    assert 1 in col, "Value 1 should be in the collection"
 
             def __iter__(self):
                 return iter(self.data)

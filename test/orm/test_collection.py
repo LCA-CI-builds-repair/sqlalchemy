@@ -603,7 +603,8 @@ class CollectionsTest(OrderedDictFixture, fixtures.ORMTest):
                 return self.data.pop(index)
 
             def extend(self):
-                assert False
+                if not collection_cls.is_mutable():
+             log Error Add specifics of bug
 
             def __len__(self):
                 return len(self.data)
